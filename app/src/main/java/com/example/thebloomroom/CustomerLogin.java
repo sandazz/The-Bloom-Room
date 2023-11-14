@@ -1,12 +1,12 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thebloomroom.database.DataHandler;
 
@@ -19,11 +19,13 @@ public class CustomerLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_login);
 
+        // Initialize EditText fields
         email = findViewById(R.id.customer_email_login_input);
         password = findViewById(R.id.customer_password_login_input);
         dataHandler.openDB();
 
     }
+
     //Email validation
     private boolean validEmail() {
         String Email = email.getText().toString().trim();
@@ -51,8 +53,9 @@ public class CustomerLogin extends AppCompatActivity {
             return true;
         }
 
-    }
+    }// Check customer login credentials
 
+    // Perform customer login
     public void CustomerLogin(View view) {
         String Email = email.getText().toString().trim();
         String Password = password.getText().toString().trim();
@@ -60,6 +63,8 @@ public class CustomerLogin extends AppCompatActivity {
         if (!validEmail()  | !validPassword() ) {
             return;
         }
+
+        // Check customer login credentials
         Boolean CustomerLogin = dataHandler.CustomerLogin(Email, Password);
         if (CustomerLogin == true) {
             Toast.makeText(getApplicationContext(), "Logging Successfully", Toast.LENGTH_SHORT).show();
@@ -70,7 +75,7 @@ public class CustomerLogin extends AppCompatActivity {
         }
     }
 
-
+    // Navigate to customer registration activity
     public void CustomerRegister(View view) {
         Intent intent = new Intent(CustomerLogin.this, customer_registration.class);
         startActivity(intent);

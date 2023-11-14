@@ -1,12 +1,12 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thebloomroom.database.Customer;
 import com.example.thebloomroom.database.DataHandler;
@@ -20,6 +20,7 @@ public class customer_registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_registration);
 
+        // Initialize EditText fields
         name = findViewById(R.id.customer_name_input);
         email = findViewById(R.id.customer_email_input);
         password = findViewById(R.id.customer_password_input);
@@ -27,6 +28,7 @@ public class customer_registration extends AppCompatActivity {
         dataHandler.openDB();
     }
 
+    // Navigate to CustomerLogin activity
     public void CustomerLogin(View view) {
         Intent intent = new Intent(customer_registration.this, CustomerLogin.class);
         startActivity(intent);
@@ -100,7 +102,7 @@ public class customer_registration extends AppCompatActivity {
 
     }
 
-
+    // Register a new customer
     public void Register(View v) {
         String Name = name.getText().toString().trim();
         String Email = email.getText().toString().trim();

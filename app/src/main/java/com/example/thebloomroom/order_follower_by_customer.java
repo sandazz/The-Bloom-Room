@@ -1,13 +1,13 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thebloomroom.database.CustomerOrder;
 import com.example.thebloomroom.database.DBConnector;
@@ -38,6 +38,7 @@ public class order_follower_by_customer extends AppCompatActivity {
         getData();
     }
 
+    // Retrieve data from the intent
     private void getData() {
         if (getIntent().getBundleExtra("userdata") != null) {
             Bundle bundle = getIntent().getBundleExtra("userdata");
@@ -86,6 +87,7 @@ public class order_follower_by_customer extends AppCompatActivity {
     }
 
 
+    // Add order when the "Add Order" button is clicked
     public void AddOrder(View v) {
         String Name = name.getText().toString().trim();
         String Description = description.getText().toString().trim();
@@ -95,10 +97,12 @@ public class order_follower_by_customer extends AppCompatActivity {
         String Address = address.getText().toString().trim();
         String Quantity = quantity.getText().toString().trim();
 
+        // Validate input fields
         if (!validName() | !validAddress() | !validQuantity()) {
             return;
         }
 
+        // Create a CustomerOrder object and add it to the database
         CustomerOrder customerOrder = new CustomerOrder(Name,Description,Price,Category,C_Name,Address,Quantity);
         try {
             datahandler.addOrder(customerOrder);

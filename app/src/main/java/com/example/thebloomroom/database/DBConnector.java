@@ -6,11 +6,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+// DBConnector class for managing the SQLite database
 public class DBConnector extends SQLiteOpenHelper {
+
+    // Constructor for DBConnector
     public DBConnector(@Nullable Context context) {
         super(context, "The_Bloom_Room", null,1);
     }
 
+    // Method called when the database is created
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Customer (id INTEGER PRIMARY KEY AUTOINCREMENT,Name text,Email text,Password text,Repeat_Password text)");
@@ -21,6 +25,7 @@ public class DBConnector extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Processing (id INTEGER PRIMARY KEY AUTOINCREMENT,Name text,Description text,Price text,Category text,Customer_Name text,Address Text,Quantity text,Status text)");
     }
 
+    // Method called when the database needs to be upgraded
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Customer");

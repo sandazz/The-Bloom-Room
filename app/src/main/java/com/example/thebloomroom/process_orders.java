@@ -1,21 +1,18 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.thebloomroom.adapter.ProcessOrderAdapter;
 import com.example.thebloomroom.database.CustomerOrder;
 import com.example.thebloomroom.database.DBConnector;
-import com.example.thebloomroom.database.Order;
-import com.example.thebloomroom.database.Process;
-
 
 import java.util.ArrayList;
 
@@ -36,6 +33,7 @@ public class process_orders extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
     }
 
+    // Display data in the RecyclerView
     private void displayData() {
         sqLiteDatabase = db.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from CustomerOrder", null);
@@ -57,6 +55,7 @@ public class process_orders extends AppCompatActivity {
         recyclerView.setAdapter(processOrderAdapter);
     }
 
+    // Process order when the "Process" button is clicked
     public void process(View view){
         Toast.makeText(getApplicationContext(), "Order Process Successfully", Toast.LENGTH_SHORT).show();
     }

@@ -5,20 +5,24 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+// DataHandler class for handling database operations
 public class DataHandler {
     private Context con;
     private DBConnector dbCon;
     private SQLiteDatabase db;
 
+    // Constructor for the DataHandler
     public DataHandler(Context con) {
         this.con = con;
     }
 
+    // Method to open the database
     public void openDB() {
         this.dbCon = new DBConnector(con);
         this.db = dbCon.getWritableDatabase();
     }
 
+    // Method to register a customer in the database
     public void CustomerRegister(Customer customer) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name", customer.getName());
@@ -28,7 +32,7 @@ public class DataHandler {
         db.insert("Customer", null, contentValues);
     }
 
-    //Admin Registration
+    // Method to register an admin in the database
     public void AdminRegister(Admin admin) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name", admin.getName());
@@ -38,6 +42,7 @@ public class DataHandler {
         db.insert("Admin", null, contentValues);
     }
 
+    // Method to check admin login credentials
     public boolean AdminLogin (String email, String password) {
         Cursor cursor = db.rawQuery("SELECT * FROM Admin  WHERE Email=? and Password=?", new String[]{email, password});
         if (cursor.getCount() > 0) {
@@ -47,6 +52,7 @@ public class DataHandler {
         }
     }
 
+    // Method to check customer login credentials
     public boolean CustomerLogin (String email, String password) {
         Cursor cursor = db.rawQuery("SELECT * FROM Customer  WHERE Email=? and Password=?", new String[]{email, password});
         if (cursor.getCount() > 0) {
@@ -56,14 +62,14 @@ public class DataHandler {
         }
     }
 
-    //Admin AddCategory
+    // Method to add a category by an admin
     public void AddCategory(Category category) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name", category.getName());
         db.insert("Category", null, contentValues);
     }
 
-    //Admin Toys
+    // Method to add followers by an admin
     public void AdminAddFollowers(Followers followers) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name", followers.getName());
@@ -73,6 +79,7 @@ public class DataHandler {
         db.insert("Followers", null, contentValues);
     }
 
+    // Method to add a customer order
     public void addOrder(CustomerOrder customerOrder) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name", customerOrder.getName());
@@ -85,6 +92,7 @@ public class DataHandler {
         db.insert("CustomerOrder", null, contentValues);
     }
 
+    // Method to process an order
     public void OrderProcess(Process toys) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name", toys.getName());

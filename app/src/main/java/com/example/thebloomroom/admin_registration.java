@@ -1,12 +1,12 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thebloomroom.database.Admin;
 import com.example.thebloomroom.database.DataHandler;
@@ -19,14 +19,16 @@ public class admin_registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_registration);
+        // Initialize UI elements
         name = findViewById(R.id.admin_name_input);
         email = findViewById(R.id.admin_email_input);
         password = findViewById(R.id.admin_password_input);
         c_password = findViewById(R.id.admin_c_password_input);
+        // Open the database connection
         dataHandler.openDB();
     }
 
-    //name validation
+    // Validate admin name
     private boolean validName() {
         String fname = name.getText().toString().trim();
 
@@ -40,6 +42,7 @@ public class admin_registration extends AppCompatActivity {
 
     }
 
+    // Validate admin email
     private boolean validEmail() {
         String Email = email.getText().toString().trim();
 
@@ -54,7 +57,7 @@ public class admin_registration extends AppCompatActivity {
     }
 
 
-    //password validation
+    // Validate admin password
     private boolean validPassword() {
         String pass = password.getText().toString().trim();
         String cpass = c_password.getText().toString().trim();
@@ -72,7 +75,7 @@ public class admin_registration extends AppCompatActivity {
 
     }
 
-    //confirm password validation
+    // Validate admin confirm password
     private boolean validCPassword() {
         String cpass = c_password.getText().toString().trim();
         String pass = password.getText().toString().trim();
@@ -90,6 +93,7 @@ public class admin_registration extends AppCompatActivity {
 
     }
 
+    // Handle admin registration
     public void Register(View view){
         String Name = name.getText().toString().trim();
         String Email = email.getText().toString().trim();

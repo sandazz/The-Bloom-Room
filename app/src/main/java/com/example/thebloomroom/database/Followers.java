@@ -1,5 +1,6 @@
 package com.example.thebloomroom.database;
 
+// Followers class representing the entity for follower items
 public class Followers {
     private int id;
     private String Name;
@@ -7,6 +8,7 @@ public class Followers {
     private String Price;
     private String Category;
 
+    // Constructor for the Followers class
     public Followers(int id, String name, String description, String price, String category) {
         this.id = id;
         Name = name;
@@ -15,42 +17,52 @@ public class Followers {
         Category = category;
     }
 
+    // Getter method for retrieving the unique identifier
     public int getId() {
         return id;
     }
 
+    // Setter method for setting the unique identifier
     public void setId(int id) {
         this.id = id;
     }
 
+    // Getter method for retrieving the name of the follower item
     public String getName() {
         return Name;
     }
 
+    // Setter method for setting the name of the follower item
     public void setName(String name) {
         Name = name;
     }
 
+    // Getter method for retrieving the description of the follower item
     public String getDescription() {
         return Description;
     }
 
+    // Setter method for setting the description of the follower item
     public void setDescription(String description) {
         Description = description;
     }
 
+    // Getter method for retrieving the price of the follower item
     public String getPrice() {
         return Price;
     }
 
+    // Setter method for setting the price of the follower item
     public void setPrice(String price) {
         Price = price;
     }
 
+    // Getter method for retrieving the category of the follower item
     public String getCategory() {
         return Category;
     }
 
+    // Setter method for setting the category of the follower item
     public void setCategory(String category) {
         Category = category;
     }

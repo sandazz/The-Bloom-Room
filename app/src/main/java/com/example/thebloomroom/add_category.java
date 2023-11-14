@@ -1,7 +1,5 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thebloomroom.database.Category;
 import com.example.thebloomroom.database.DBConnector;
@@ -41,6 +41,7 @@ public class add_category extends AppCompatActivity {
         admin_category_edit_button.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
+                // Update category data
                 ContentValues cv = new ContentValues();
                 cv.put("Name", admin_category_name.getText().toString());
 
@@ -59,7 +60,7 @@ public class add_category extends AppCompatActivity {
         });
     }
 
-    //name validation
+    // Validate category name
     private boolean validName() {
         String fname = admin_category_name.getText().toString().trim();
 
@@ -77,6 +78,7 @@ public class add_category extends AppCompatActivity {
 
     @SuppressLint("NotConstructor")
     public void AddCategory(View v) {
+        // Add a new category
         String Name = admin_category_name.getText().toString().trim();
 
         if (!validName()) {
@@ -96,6 +98,7 @@ public class add_category extends AppCompatActivity {
         }
     }
 
+    // Edit existing category data
     private void editData() {
         if (getIntent().getBundleExtra("userdata") != null) {
             Bundle bundle = getIntent().getBundleExtra("userdata");
@@ -106,6 +109,7 @@ public class add_category extends AppCompatActivity {
         }
     }
 
+    // View all categories
     public void viewCategories(View view) {
         Intent intent = new Intent(add_category.this, view_categories.class);
         startActivity(intent);

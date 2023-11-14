@@ -1,7 +1,5 @@
 package com.example.thebloomroom;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thebloomroom.database.DBConnector;
 import com.example.thebloomroom.database.DataHandler;
@@ -29,6 +29,7 @@ public class add_followers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_followers);
 
+        // Initialize UI components
         follower_name = findViewById(R.id.admin_follower_name_input);
         follower_description = findViewById(R.id.admin_follower_description_input);
         follower_price = findViewById(R.id.admin_follower_price_input);
@@ -36,14 +37,18 @@ public class add_followers extends AppCompatActivity {
         edit_button = findViewById(R.id.admin_follower_edit_button);
         submit_button = findViewById(R.id.admin_follower_submit_button);
 
+        // Open the database connection
         datahandler.openDB();
         db = new DBConnector(this);
 
+        // Handle editing data
         editData();
 
+        // Handle click on edit button
         edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Update follower data
                 ContentValues cv = new ContentValues();
                 cv.put("Name", follower_name.getText().toString());
                 cv.put("Description", follower_description.getText().toString());
@@ -63,6 +68,7 @@ public class add_followers extends AppCompatActivity {
         });
     }
 
+    // Populate UI fields with existing data for editing
     private void editData() {
         if (getIntent().getBundleExtra("userdata") != null) {
             Bundle bundle = getIntent().getBundleExtra("userdata");
@@ -76,7 +82,7 @@ public class add_followers extends AppCompatActivity {
         }
     }
 
-    //name validation
+    // Validate follower name
     private boolean validName() {
         String fname = follower_name.getText().toString().trim();
 
@@ -91,7 +97,7 @@ public class add_followers extends AppCompatActivity {
 
     }
 
-    //Description validation
+    // Validate follower description
     private boolean validDescription() {
         String desc = follower_description.getText().toString().trim();
 
@@ -106,7 +112,7 @@ public class add_followers extends AppCompatActivity {
 
     }
 
-    //Price validation
+    // Validate follower price
     private boolean validPrice() {
         String prices = follower_price.getText().toString().trim();
 
@@ -121,7 +127,7 @@ public class add_followers extends AppCompatActivity {
     }
 
 
-    //Category validation
+    // Validate follower category
     private boolean validCategory() {
         String cat = follower_category.getText().toString().trim();
 
@@ -135,18 +141,22 @@ public class add_followers extends AppCompatActivity {
 
     }
 
+    // Add or update follower data
     public void addFollowers(View v) {
         String Name = follower_name.getText().toString().trim();
         String Description = follower_description.getText().toString().trim();
         String Price = follower_price.getText().toString().trim();
         String Category = follower_category.getText().toString().trim();
 
+        // Validate input fields
         if (!validName() | !validDescription() | !validPrice() | !validCategory()) {
             return;
         }
 
+        // Create a Followers object
         Followers followers = new Followers(id,Name,Description,Price,Category);
         try {
+            // Add or update follower data in the database
             datahandler.AdminAddFollowers(followers);
             Toast.makeText(getApplicationContext(), "Toy Added Successfully.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(add_followers.this, add_followers.class);
@@ -159,6 +169,7 @@ public class add_followers extends AppCompatActivity {
 
     }
 
+    // View all followers
     public void viewFollowers(View view) {
         Intent intent = new Intent(add_followers.this, view_followers.class);
         startActivity(intent);
